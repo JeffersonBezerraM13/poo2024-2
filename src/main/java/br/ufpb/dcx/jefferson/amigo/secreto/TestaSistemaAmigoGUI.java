@@ -47,8 +47,9 @@ public class TestaSistemaAmigoGUI {
 
         System.out.println("Relatório de quem tirou quem");
         for(Amigo a: sistema.pesquisaTodosOsAmigos()){
-            System.out.println(a.getEmail()+" tirou "+a.getEmailAmigoSorteado()+" como amigo secreto");
+            System.out.println(a.getEmail()+" tASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAirou "+a.getEmailAmigoSorteado()+" como amigo secreto");
         }
+
         leitor.close();
     }
 }

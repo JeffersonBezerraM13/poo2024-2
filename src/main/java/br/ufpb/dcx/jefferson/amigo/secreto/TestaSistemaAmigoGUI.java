@@ -1,55 +1,49 @@
 package br.ufpb.dcx.jefferson.amigo.secreto;
 
+import javax.swing.*;
 import java.util.List;
-import java.util.Scanner;
 
 public class TestaSistemaAmigoGUI {
     public static void main(String [] args){
+        //a) Inicialize a variável do tipo SistemaAmigo.
         SistemaAmigo sistema = new SistemaAmigo();
-        Scanner leitor = new Scanner(System.in);
-        System.out.print("Quando amigos vão participar da brincadeira?");
-        int quant = Integer.parseInt(leitor.nextLine());
+        //b) Leia a quantidade total de amigos a participar da brincadeira
+        int quant = Integer.parseInt(JOptionPane.showInputDialog(null,"Quantos amigos vão participar da brincadeira?"));
+        //c) Leia os dados (nome e e-mail) de cada um dos amigos e os cadastre.
         for (int x = 0; x<quant; x++){
-            System.out.println("Insira os dados do "+(x+1)+"º participante");
-            System.out.println("Insira o nome:");
-            String nome = leitor.next();
-            System.out.println("Email:");
-            String email = leitor.next();
+            String nome = JOptionPane.showInputDialog(null,"Insira o nome:","Insira os dados do "+(x+1)+"º participante", JOptionPane.QUESTION_MESSAGE);
+            String email = JOptionPane.showInputDialog(null,"Email:","Insira os dados do "+(x+1)+"º participante",JOptionPane.QUESTION_MESSAGE);
             try{
                 sistema.cadastraAmigo(nome,email);
+                JOptionPane.showMessageDialog(null,"Cadastro do participante "+(x+1)+" realizado com sucesso!","Mensagem do sistema", JOptionPane.INFORMATION_MESSAGE);
             } catch (AmigoJaExisteException e){
-                System.out.println("Esse participante já está cadastrado");
+                JOptionPane.showMessageDialog(null,"Esse participante já está cadastrado","Mesangem do sistema",JOptionPane.INFORMATION_MESSAGE);
             }
         }
+        //d) Cadastre os resultados do sorteio dos amigos secretos (diga quem pegou quem).
+        //Obs.: Eu criei esse método "pesquisaTodosOsAmigos()"
         List<Amigo> todosOsAmigos = sistema.pesquisaTodosOsAmigos();
-        for(int x = 0; x<todosOsAmigos.size(); x++){
-            Scanner leitor2 = new Scanner(System.in);
-            Amigo amigoDaVez = todosOsAmigos.get(x);
-            System.out.println("Insira o email do amigo sorteado de "+amigoDaVez.getEmail());
-            String emailAmigo = leitor2.nextLine();
+        for (Amigo amigoDaVez : todosOsAmigos) {
+            String emailAmigo = JOptionPane.showInputDialog(null, "Insira o email do amigo sorteado de " + amigoDaVez.getNome(), "Selecionando os sorteados", JOptionPane.QUESTION_MESSAGE);
             amigoDaVez.setEmailAmigoSorteado(emailAmigo);
-            System.out.println(amigoDaVez.getEmail()+" tirou "+amigoDaVez.getEmailAmigoSorteado());
+            System.out.println(amigoDaVez.getNome() + " tirou " + amigoDaVez.getEmailAmigoSorteado());
         }
-
-        System.out.println("Se você quer enviar mensagem para todos\nInsira o seu os seguintes dados");
-        System.out.println("Email do remetente:");
-        String emailReme = leitor.nextLine();
-        System.out.println("Insira a mensagem que deseja enviar:");
-        String msg = leitor.nextLine();
-
-
+        //e) Envie uma mensagem de algum dos amigos para todos, coletando para isso os dados necessários (ex: remetente,  texto, se a mensagem é anônima ou não).
+        String emailReme = JOptionPane.showInputDialog(null, "Insira o seu os seguintes dados\n\nEmail do remetente:", "Enviar mensagem para todos",JOptionPane.QUESTION_MESSAGE);
+        String msg = JOptionPane.showInputDialog(null, "Insira a mensagem que deseja enviar:","Enviar mensagem para todos",JOptionPane.QUESTION_MESSAGE);
         boolean anonima = false;
-        System.out.println("Deseja que a mensagem seja anonima?(S/N)");
-        if(leitor.nextLine().equalsIgnoreCase("s")){
+        String anonimaStr = JOptionPane.showInputDialog(null,"Deseja que seja anonima?(S/N)","Enviar mensagem para todos",JOptionPane.QUESTION_MESSAGE);
+        if(anonimaStr.equalsIgnoreCase("s")){
             anonima = true;
         }
         sistema.enviarMensagemParaTodos(msg,emailReme,anonima);
-
-        System.out.println("Relatório de quem tirou quem");
+        //Questão 5
+        //Não consegui fazer, ta dando erro
+        sistema.sortear();
+        String amigosStr = "";
         for(Amigo a: sistema.pesquisaTodosOsAmigos()){
-            System.out.println(a.getEmail()+" tASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAirou "+a.getEmailAmigoSorteado()+" como amigo secreto");
+            amigosStr += a.toString();
         }
-
-        leitor.close();
+        JOptionPane.showMessageDialog(null,amigosStr,"Relatório dos amigos sorteados", JOptionPane.INFORMATION_MESSAGE);
     }
 }

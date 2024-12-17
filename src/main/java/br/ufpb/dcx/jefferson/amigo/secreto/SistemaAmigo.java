@@ -2,6 +2,7 @@ package br.ufpb.dcx.jefferson.amigo.secreto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SistemaAmigo {
     private List<Mensagem> mensagens;
@@ -79,12 +80,20 @@ public class SistemaAmigo {
         }
         throw new AmigoInexistenteException();
     }
+
+    //Não consegui fazer
     public void sortear(){
         List<Amigo> amigosNaoSorteados = this.amigos;
         for (Amigo a: this.amigos){
-            int posicaoDaListaSorteada = (int) (Math.random()*amigosNaoSorteados.size());
-            a.setEmailAmigoSorteado(amigosNaoSorteados.get(posicaoDaListaSorteada).getEmail());
-            amigosNaoSorteados.remove(posicaoDaListaSorteada);
+            Random random = new Random();
+            int posicaoDaListaSorteada = random.nextInt(1,amigosNaoSorteados.size()); //Sorteio 1 a o tamanho do List<Amigo> amigosNaoSorteados
+            if(a.getNome().equalsIgnoreCase(amigosNaoSorteados.get(posicaoDaListaSorteada).getNome())){ //Se eu tirar eu mesmo
+               a.setEmailAmigoSorteado(amigosNaoSorteados.get(posicaoDaListaSorteada+1).getEmail());//Coloco o proximo do amigo aleatorio para ser meu amigo secreto
+                amigosNaoSorteados.remove(posicaoDaListaSorteada+1);
+            } else { //Se eu tirar outra pessoa
+                a.setEmailAmigoSorteado(amigosNaoSorteados.get(posicaoDaListaSorteada).getEmail()); //Defino esse email sorteado como email go amigo secreto do amigo "a" do for each
+                amigosNaoSorteados.remove(amigosNaoSorteados.get(posicaoDaListaSorteada)); //e removo o email sorteado da lista de emails sorteados
+            }
         }
     }
 }

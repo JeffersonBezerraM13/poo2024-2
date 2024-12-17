@@ -28,4 +28,7 @@ public class Amigo {
     public void setEmailAmigoSorteado(String emailAmigoSorteado){
         this.emailAmigoSorteado = emailAmigoSorteado;
     }
+    public String toString(){
+        return  ("Nome: "+this.nome+", Email: "+this.email+", Email do amigo secreto: "+this.emailAmigoSorteado);
+    }
 }

@@ -19,5 +19,49 @@ public class AtendimentoMedico {
     public AtendimentoMedico() {
         this("",CategoriaAtendimento.INDEFINIDO, "","",new Data());
     }
-//Demais métodos da classe por aqui …
+
+    public Data getDiaAtendimento() {
+        return diaAtendimento;
+    }
+
+    public void setDiaAtendimento(Data diaAtendimento) {
+        this.diaAtendimento = diaAtendimento;
+    }
+
+    public String getCrmMedico() {
+        return crmMedico;
+    }
+
+    public void setCrmMedico(String crmMedico) {
+        this.crmMedico = crmMedico;
+    }
+
+    public String getCpfPaciente() {
+        return cpfPaciente;
+    }
+
+    public void setCpfPaciente(String cpfPaciente) {
+        this.cpfPaciente = cpfPaciente;
+    }
+
+    public CategoriaAtendimento getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaAtendimento categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getCodigoFicha() {
+        return codigoFicha;
+    }
+
+    public void setCodigoFicha(String codigoFicha) {
+        this.codigoFicha = codigoFicha;
+    }
+
+    @Override
+    public String toString() {
+        return "TODO: Atendimento médico";
+    }
 }

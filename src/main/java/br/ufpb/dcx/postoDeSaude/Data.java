@@ -41,7 +41,7 @@ public class Data {
 
     @Override
     public String toString() {
-        return "Dia:";
+        return this.dia+"/"+this.mes+"/"+this.ano;
     }
 
     @Override

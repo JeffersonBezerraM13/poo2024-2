@@ -1,6 +1,5 @@
-package br.ufpb.dcx.postoDeSaude;
+package br.ufpb.dcx.jefferson.posto.saude;
 
-import java.text.CollationElementIterator;
 import java.util.*;
 
 public class SistemaGerenciadorAtendimentosPostoRioTinto implements
@@ -34,8 +33,16 @@ public class SistemaGerenciadorAtendimentosPostoRioTinto implements
     }
 
     @Override
-    public void cadastrarAtendimento(String codigoFicha, CategoriaAtendimento categoria, String cpfPaciente, String crmMedico, Data diaAtendimento) throws MedicoNaoCadastradoException, AtendimentoJaCadastradoException {
-
+    public void cadastrarAtendimento(String codigoFicha, CategoriaAtendimento categoria, String cpfPaciente, String crmMedico, Data diaAtendimento)
+            throws MedicoNaoCadastradoException, AtendimentoJaCadastradoException {
+        if(this.atendimentos.containsKey(codigoFicha)){
+            throw new AtendimentoJaCadastradoException("Esse atendimento já está cadastrado");
+        } else if (!this.medicos.containsKey(crmMedico)){
+            throw new MedicoNaoCadastradoException();
+        } else {
+            AtendimentoMedico atm = new AtendimentoMedico(codigoFicha,categoria,cpfPaciente,crmMedico,diaAtendimento);
+            this.atendimentos.put(codigoFicha, atm);
+        }
     }
 
     @Override
@@ -50,23 +57,24 @@ public class SistemaGerenciadorAtendimentosPostoRioTinto implements
 
     @Override
     public Collection<AtendimentoMedico> pesquisaAtendimentosDoDia(Data diaAtendimento) {
-        Collection<AtendimentoMedico> atendimentosDia = new LinkedList<>();
-        for(AtendimentoMedico at: this.atendimentos.values()){
+        Collection<AtendimentoMedico> atendimentoMedicoCollection = new LinkedList<>();
+        for (AtendimentoMedico at: this.atendimentos.values()){
             if(at.getDiaAtendimento().equals(diaAtendimento)){
-                atendimentosDia.add(at);
+                atendimentoMedicoCollection.add(at);
             }
         }
-        return atendimentosDia;
+        return atendimentoMedicoCollection;
     }
 
     @Override
     public int contaAtendimentosDaCategoria(CategoriaAtendimento categoria) {
-        int quantAtendimentosDaCategoria = 0;
+        int quantAtendimentoDaCategoria = 0;
         for (AtendimentoMedico at: this.atendimentos.values()){
-            if(at.getCategoria() == categoria)
-                quantAtendimentosDaCategoria++;
+            if(at.getCategoria().equals(categoria)){
+                quantAtendimentoDaCategoria++;
+            }
         }
-        return quantAtendimentosDaCategoria;
+        return quantAtendimentoDaCategoria;
     }
 }
 

@@ -1,4 +1,4 @@
-package br.ufpb.dcx.postoDeSaude;
+package br.ufpb.dcx.jefferson.posto.saude;
 
 public class AtendimentoJaCadastradoException extends Exception {
 

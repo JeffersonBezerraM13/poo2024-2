@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
 
 public class SistemaAmigoTest {
 
-    SistemaAmigo sistema;
+    SistemaAmigoMap sistema;
 
     @BeforeEach
     void setUp()  {
-        this.sistema = new SistemaAmigo();
+        this.sistema = new SistemaAmigoMap();
     }
 
     @Test

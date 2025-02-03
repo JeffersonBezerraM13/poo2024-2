@@ -16,18 +16,26 @@ public class Disciplina {
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public Integer getCodigo() {
-        return codigo;
+        return this.codigo;
     }
 
     public List<Horario> getHorarios() {
-        return horarios;
+        return this.horarios;
     }
 
     public int getMatriculaProf() {
-        return matriculaProf;
+        return this.matriculaProf;
+    }
+    @Override
+    public String toString(){
+        StringBuilder horariosToString = new StringBuilder();
+        for(Horario h: this.horarios){
+            horariosToString.append("\n").append(h.toString());
+        }
+        return  ("Disciplina de nome: "+this.nome+" código "+this.codigo+ "\nHorários: "+horariosToString);
     }
 }

@@ -22,8 +22,8 @@ public class Horario {
     public DiaDaSemana getDia() {
         return dia;
     }
-
-    public String getNomeDaDiciplina(){
-        return "TODO";
+    @Override
+    public String toString(){
+        return (this.dia+": "+this.horaInicio+" - "+this.horaFim);
     }
 }

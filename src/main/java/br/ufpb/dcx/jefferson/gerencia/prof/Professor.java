@@ -16,4 +16,8 @@ public class Professor {
     public Integer getMatricula() {
         return matricula;
     }
+    @Override
+    public String toString(){
+        return ("Professor "+this.nome+ ", matrícula: "+this.matricula);
+    }
 }

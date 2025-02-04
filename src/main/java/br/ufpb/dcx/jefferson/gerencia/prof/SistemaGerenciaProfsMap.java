@@ -27,7 +27,9 @@ public class SistemaGerenciaProfsMap implements SistemaGerenciaProfs {
     public List<String> consultaNomesDisciplinasDoProfessor(int matriculaProf) throws ProfessorInexistenteException{
         List<String> disciplinasDoProf = new ArrayList<>();
         if(this.professores.containsKey(matriculaProf)){
-            disciplinasDoProf.add(this.disciplinas.get(matriculaProf).getNome());
+            for(Disciplina d: this.disciplinas.values()){
+                disciplinasDoProf.add(d.getNome());
+            }
         } else {
             throw new ProfessorInexistenteException("Não há professor cadastrado com a matrícula "+matriculaProf);
         }

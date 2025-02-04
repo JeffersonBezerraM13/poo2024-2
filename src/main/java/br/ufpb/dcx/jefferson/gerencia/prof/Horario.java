@@ -24,6 +24,6 @@ public class Horario {
     }
     @Override
     public String toString(){
-        return (this.dia+": "+this.horaInicio+" - "+this.horaFim);
+        return (this.dia+": "+this.horaInicio+" - "+this.horaFim).toString();
     }
 }

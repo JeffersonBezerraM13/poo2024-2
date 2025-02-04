@@ -57,10 +57,9 @@ public class SistemaGerenciaProfsMap implements SistemaGerenciaProfs {
         } else {
             throw new ProfessorInexistenteException("Não há professor cadastrado com a matrícula "+matriculaProfessor);
         }
-
     }
 
-    @Override //Não entendi pq o método retorna void na atividade
+    @Override
     public Disciplina pesquisaDisciplina(int codigoDisciplina) throws DisciplinaInexistenteException {
         if(this.disciplinas.containsKey(codigoDisciplina)){
             return this.disciplinas.get(codigoDisciplina);
@@ -69,13 +68,12 @@ public class SistemaGerenciaProfsMap implements SistemaGerenciaProfs {
         }
     }
 
-    @Override //Não entendi pq o método retorna void na atividade
+    @Override
     public Professor pesquisaProfessor(int matriculaProfessor) throws ProfessorInexistenteException {
         if(this.professores.containsKey(matriculaProfessor)){
             return this.professores.get(matriculaProfessor);
         } else {
             throw new ProfessorInexistenteException("Não há professor cadastrado com a matrícula "+matriculaProfessor);
         }
-
     }
 }

@@ -24,6 +24,10 @@ public class Horario {
     }
     @Override
     public String toString(){
-        return (this.dia+": "+this.horaInicio+" - "+this.horaFim).toString();
+        return (this.dia+": "+this.horaInicio+" - "+this.horaFim);
+    }
+    public static void main(String [] args){
+        Horario horario = new Horario(10,12,DiaDaSemana.TERCA);
+        System.out.println(horario.toString());
     }
 }

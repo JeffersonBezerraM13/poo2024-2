@@ -1,7 +1,5 @@
 package br.ufpb.dcx.jefferson.roupas.prova;
 
-import com.sun.source.tree.BinaryTree;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

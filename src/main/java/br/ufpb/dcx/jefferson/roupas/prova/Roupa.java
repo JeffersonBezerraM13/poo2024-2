@@ -1,6 +1,8 @@
 package br.ufpb.dcx.jefferson.roupas.prova;
 
-public class Roupa {
+import java.io.Serializable;
+
+public class Roupa implements Serializable {
     private String codigo;
     private String descricao;
     private int quantidade;
@@ -34,6 +36,6 @@ public class Roupa {
     }
     @Override
     public String toString(){
-        return "TODO";
+        return codigo+descricao+quantidade+tamanho;
     }
 }

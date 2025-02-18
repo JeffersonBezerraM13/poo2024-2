@@ -1,15 +1,26 @@
 package br.ufpb.dcx.jefferson.roupas.prova;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 public class SistemaLojaRoupasPOO implements SistemaLojaRoupas{
     private Map<String, Roupa> roupasMap;
+    private GravadorDeRoupas gravador;
 
     public SistemaLojaRoupasPOO() {
         this.roupasMap = new HashMap<>();
+        this.gravador = new GravadorDeRoupas();
+    }
+
+    public void recuperaRoupas() throws IOException, RoupaJaExisteException {
+        Collection<Roupa> roupasAchadas = this.gravador.recuperaRoupas();
+        for(Roupa r: roupasAchadas){
+            this.cadastraRoupa(r.getCodigo(),r.getDescricao(),r.getTamanho(),r.getQuantidade());
+        }
+    }
+
+    public void salvarRoupas() throws IOException{
+        this.gravador.gravaRoupas(this.roupasMap.values());
     }
 
     @Override

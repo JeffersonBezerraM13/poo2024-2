@@ -17,7 +17,7 @@ public class Roupa implements Serializable {
 
     public String getCodigo() {
         return codigo;
-    }
+    } @SuppressWarnings("CALADO")
 
     public String getDescricao() {
         return descricao;

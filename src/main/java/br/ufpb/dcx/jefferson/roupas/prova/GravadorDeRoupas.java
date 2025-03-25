@@ -12,6 +12,7 @@ public class GravadorDeRoupas {
     public GravadorDeRoupas(){
         this.arquivoRoupas = "roupas.dat"; //.dat indica que é um arquivo de dados
     }
+
     public Collection<Roupa> recuperaRoupas() throws IOException{
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(arquivoRoupas))) { //lendo o arquivo com o nome do atributo
             Collection<Roupa> roupasAchadas = (ArrayList<Roupa>) in.readObject();//pode acontecer a exception classnotfound ou classcastexception
@@ -43,31 +44,4 @@ public class GravadorDeRoupas {
         }
 
     }
-    public static void main (String [] args){
-        Roupa r = new Roupa("111", "Camisa verdeeeee", 5, Tamanho.M);
-        Roupa r2 = new Roupa("222", "Camisa amarela", 10, Tamanho.G);
-
-        List<Roupa> roupa = new LinkedList<>(); //usando arraylist pq ele é serializavel e vai ter um cast para arrayList
-        roupa.add(r);
-        roupa.add(r2);
-
-        GravadorDeRoupas gravadorDeRoupas = new GravadorDeRoupas();
-        System.out.println("Recuperando roupas...");
-        try {
-
-            Collection<Roupa> roupasAchadas = gravadorDeRoupas.recuperaRoupas();
-            System.out.println("Roupas achadas:");
-            for(Roupa roupinha : roupasAchadas){
-                System.out.println(roupinha.toString());
-            }
-            gravadorDeRoupas.gravaRoupas(roupa);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
 }

@@ -2,6 +2,7 @@ package br.ufpb.dcx.jefferson.prova.uni2;
 
 import javax.lang.model.type.ArrayType;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MeuSistemaGerenciaDeTempo implements SistemaGerenciaDeTempo {
     private Map<String, Tarefa> tarefas;
@@ -22,24 +23,26 @@ public class MeuSistemaGerenciaDeTempo implements SistemaGerenciaDeTempo {
 
     @Override
     public Collection<Tarefa> pesquisarTarefasDaCategoria(CategoriaTarefa categoria) {
-        Collection<Tarefa> tarefasPesq = new LinkedList<>();
-        for (Tarefa tarefa : this.tarefas.values()) {
-            if (tarefa.getCategoria() == (categoria)) {
-                tarefasPesq.add(tarefa);
-            }
-        }
-        return tarefasPesq;
+//        Collection<Tarefa> tarefasPesq = new LinkedList<>();
+//        for (Tarefa tarefa : this.tarefas.values()) {
+//            if (tarefa.getCategoria() == (categoria)) {
+//                tarefasPesq.add(tarefa);
+//            }
+//        }
+//        return tarefasPesq;
+        return this.tarefas.values().stream().filter(t -> t.getCategoria() == categoria).toList();
     }
 
     @Override
     public Collection<Tarefa> pesquisarTarefasQueDuraramMaisDe(int tempoEmMinutos) {
-        Collection<Tarefa> tarefasQueDuramMais = new ArrayList<>();
-        for(Tarefa t: this.tarefas.values()){
-            if(t.getTempoTarefaEmMinutos() > tempoEmMinutos){
-                tarefasQueDuramMais.add(t);
-            }
-        }
-        return tarefasQueDuramMais;
+//        Collection<Tarefa> tarefasQueDuramMais = new ArrayList<>();
+//        for(Tarefa t: this.tarefas.values()){
+//            if(t.getTempoTarefaEmMinutos() > tempoEmMinutos){
+//                tarefasQueDuramMais.add(t);
+//            }
+//        }
+//        return tarefasQueDuramMais;
+        return this.tarefas.values().stream().filter(t -> t.getTempoTarefaEmMinutos() > tempoEmMinutos).toList();
     }
 
     @Override
@@ -66,13 +69,14 @@ public class MeuSistemaGerenciaDeTempo implements SistemaGerenciaDeTempo {
 
     @Override
     public Collection<Tarefa> pesquisarTarefasPorDescricao(String descricao) {
-        Collection<Tarefa> tarefasPorDescricao = new ArrayList<>();
-        for(Tarefa t: this.tarefas.values()){
-            if(t.getDescricao().equalsIgnoreCase(descricao)){
-                tarefasPorDescricao.add(t);
-            }
-        }
-        return tarefasPorDescricao;
+//        Collection<Tarefa> tarefasPorDescricao = new ArrayList<>();
+//        for(Tarefa t: this.tarefas.values()){
+//            if(t.getDescricao().equalsIgnoreCase(descricao)){
+//                tarefasPorDescricao.add(t);
+//            }
+//        }
+//        return tarefasPorDescricao;
+        return this.tarefas.values().stream().filter(t -> t.getDescricao().equalsIgnoreCase(descricao)).toList();
     }
 
     @Override
